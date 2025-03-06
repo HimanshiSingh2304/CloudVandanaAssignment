@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4bcdb;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slider-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-images img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .prev-button {
+            left: 10px;
+        }
+
+        .next-button {
+            right: 10px;
+        }
+
+        .slider-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider-images" id="sliderImages">
+            <!-- Images will be displayed here -->
+        </div>
+        <button class="slider-button prev-button" onclick="prevImage()">&#10094; Prev</button>
+        <button class="slider-button next-button" onclick="nextImage()">Next &#10095;</button>
+    </div>
+
+    <script>
+        // Array of image URLs
+        const images = [
+            './images/Aafkes-Blog-Photos-65-1024x576.png',
+            './images/1.png',
+            './images/2.jpeg',
+            
+        ];
+
+        let currentIndex = 0;
+
+        // Function to display images
+        function displayImages() {
+            const sliderImages = document.getElementById('sliderImages');
+            sliderImages.innerHTML = ''; // Clear current images
+
+            // Create image element for the current image
+            const img = document.createElement('img');
+            img.src = images[currentIndex];
+            sliderImages.appendChild(img);
+        }
+
+        // Function to show the previous image
+        function prevImage() {
+            if (currentIndex === 0) {
+                currentIndex = images.length - 1; // Go to the last image
+            } else {
+                currentIndex--; // Go to the previous image
+            }
+            displayImages();
+        }
+
+        // Function to show the next image
+        function nextImage() {
+            if (currentIndex === images.length - 1) {
+                currentIndex = 0; // Go back to the first image
+            } else {
+                currentIndex++; // Go to the next image
+            }
+            displayImages();
+        }
+
+        // Initialize the slider with the first image
+        displayImages();
+    </script>
+
+</body>
+</html>
